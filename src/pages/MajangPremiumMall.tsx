@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Package, Info, X, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShoppingCart, Package, Info, X, ChevronLeft, ChevronRight, Percent } from 'lucide-react';
 
 const MajangPremiumMall = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [orderComplete, setOrderComplete] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [currentSlide, setCurrentSlide] = useState(0); // 슬라이드 상태 관리
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const heroSlides = [
         {
@@ -49,7 +48,6 @@ const MajangPremiumMall = () => {
         { id: 7, category: '박스/포장', name: '특수 진공 포장지 (100매)', price: '15,000', unit: '묶음', image: '/product-wrap.jpg' },
     ];
 
-    // 화면에 그릴 카테고리 목록 정의
     const categories = [
         { id: 'meat', title: '프리미엄 정육', subtitle: 'Meat', filter: '정육' },
         { id: 'packaging', title: '박스 및 포장재', subtitle: 'Packaging', filter: '박스/포장' },
@@ -69,7 +67,6 @@ const MajangPremiumMall = () => {
     const handleOrderClick = (product) => {
         setSelectedProduct(product);
         setIsModalOpen(true);
-        setOrderComplete(false);
     };
 
     // 상세페이지 이동 버튼 클릭 시 실행될 함수
@@ -82,12 +79,10 @@ const MajangPremiumMall = () => {
             {/* Navigation */}
             <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
                 <div className="max-w-6xl mx-auto px-6 h-24 flex items-center justify-between">
-
-                    {/* 수정된 부분: 텍스트/아이콘 -> 로고 이미지 */}
                     <div className="flex items-center">
                         <a href="#">
                             <img
-                                src="/logo2.webp"
+                                src="/business-card.webp"
                                 alt="한국포장연합 로고"
                                 className="h-12 md:h-18 w-auto object-contain"
                             />
@@ -96,9 +91,9 @@ const MajangPremiumMall = () => {
 
                     <div className="hidden md:flex gap-8 text-sm font-medium text-neutral-600">
                         <a href="#" className="hover:text-black transition-colors">Home</a>
-                        <a href="#" className="hover:text-black transition-colors">Meat (고기)</a>
-                        <a href="#" className="hover:text-black transition-colors">Packaging (박스/포장)</a>
-                        <a href="#" className="hover:text-black transition-colors">Tools (부자재)</a>
+                        <a href="#meat" className="hover:text-black transition-colors">Meat (고기)</a>
+                        <a href="#packaging" className="hover:text-black transition-colors">Packaging (박스/포장)</a>
+                        <a href="#tools" className="hover:text-black transition-colors">Tools (부자재)</a>
                     </div>
                     <div className="flex items-center gap-4">
                         <button className="p-2 hover:bg-neutral-100 rounded-full transition-colors">
@@ -125,10 +120,9 @@ const MajangPremiumMall = () => {
                                 src={slide.image}
                                 alt={slide.title}
                                 className="w-full h-full object-cover"
-                                onError={(e) => { e.target.src = `/api/placeholder/1920/1080?text=Slide+${index + 1}`; }}
+                                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `/api/placeholder/1920/1080?text=Slide+${index + 1}`; }}
                             />
                         </div>
-                        {/* 텍스트 줄바꿈을 위해 whitespace-pre-line 적용 */}
                         <div className="relative max-w-6xl mx-auto px-6 h-full flex flex-col items-start justify-center">
                             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 whitespace-pre-line drop-shadow-md">
                                 {slide.title}
@@ -143,7 +137,6 @@ const MajangPremiumMall = () => {
                     </div>
                 ))}
 
-                {/* 좌우 화살표 (PC 마우스 오버 시 표시) */}
                 <button
                     onClick={handlePrevSlide}
                     className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-black/20 hover:bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm"
@@ -157,7 +150,6 @@ const MajangPremiumMall = () => {
                     <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                 </button>
 
-                {/* 슬라이드 하단 인디케이터(Dots) */}
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
                     {heroSlides.map((_, index) => (
                         <button
@@ -175,42 +167,31 @@ const MajangPremiumMall = () => {
             {/* Product Section */}
             <main className="max-w-6xl mx-auto px-6 py-24 flex-grow space-y-20">
                 {categories.map((cat) => {
-                    // 현재 카테고리에 해당하는 상품만 필터링
                     const filteredProducts = products.filter(p => p.category === cat.filter);
 
                     return (
                         <section key={cat.id} className="scroll-mt-24" id={cat.id}>
-                            {/* 섹션 타이틀 */}
                             <div className="mb-8 border-b border-neutral-200 pb-4 flex items-baseline gap-3">
                                 <h2 className="text-2xl font-bold tracking-tight">{cat.title}</h2>
                                 <span className="text-sm font-semibold text-neutral-400 uppercase tracking-widest">{cat.subtitle}</span>
                             </div>
 
-                            {/* 상품 그리드 */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {filteredProducts.map((product) => (
                                     <div key={product.id} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-[#D9C4A9]">
-
-                                        {/* 이미지 렌더링 영역 (아이콘 제거 및 img 태그 추가) */}
                                         <div className="relative aspect-[4/3] bg-neutral-100 overflow-hidden">
                                             <img
                                                 src={product.image}
                                                 alt={product.name}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-white"
-                                                onError={(e) => {
-                                                    // 이미지가 없을 때 엑스박스 대신 띄워줄 임시 이미지 처리
-                                                    e.target.src = "/api/placeholder/400/300";
-                                                }}
+                                                onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/api/placeholder/400/300"; }}
                                             />
-                                            {/* 프리미엄 뱃지 */}
                                             {product.isPremium && (
                                                 <span className="absolute top-3 left-3 bg-yellow-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-sm tracking-wider">
-                          PREMIUM
-                        </span>
+                                                    PREMIUM
+                                                </span>
                                             )}
                                         </div>
-
-                                        {/* 상품 정보 영역 */}
                                         <div className="p-5 flex flex-col h-[140px]">
                                             <h3 className="text-lg font-bold mb-1 line-clamp-1">{product.name}</h3>
                                             <div className="flex items-end justify-between mt-auto">
@@ -222,7 +203,7 @@ const MajangPremiumMall = () => {
                                                     onClick={() => handleOrderClick(product)}
                                                     className="bg-[#1A202C] text-white px-4 py-1.5 rounded-md text-xs font-bold hover:bg-neutral-700 transition-colors"
                                                 >
-                                                    상인 회원가
+                                                    혜택 확인
                                                 </button>
                                             </div>
                                         </div>
@@ -234,17 +215,18 @@ const MajangPremiumMall = () => {
                 })}
             </main>
 
-            {/* Footer Section with Image */}
-            <footer className="bg-[#1A202C] text-white mt-auto">
+            {/* Footer Section */}
+            <footer className="bg-white text-neutral-900 border-t border-neutral-200 mt-auto">
                 <div className="max-w-6xl mx-auto px-6 py-12">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-12">
 
                         <div className="flex-1 w-full">
                             <div className="flex items-center gap-2 mb-6">
-                                <Package className="w-6 h-6 text-white" />
+                                {/* 로고 이미지 */}
+                                <img src="/logo-white.png" alt="한국포장연합 로고" className="h-8 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display='none'; }}/>
                                 <span className="text-xl font-bold tracking-tight">한국포장연합</span>
                             </div>
-                            <div className="text-sm text-neutral-400 space-y-2 font-light">
+                            <div className="text-sm text-neutral-500 space-y-2 font-light">
                                 <p>위너컴퍼니 | 사업자번호: 455-04-03016</p>
                                 <p>서비스 약관 | 개인정보처리방침 | 주소 : 경기도 용인시</p>
                                 <p>문의 INFO | 연락처: 031-1234-5678 | mail@gmail.com</p>
@@ -253,17 +235,16 @@ const MajangPremiumMall = () => {
 
                         <div className="w-full max-w-sm relative z-10">
                             <img
-                                src="/logo2.jpg"
+                                src="/business-card.webp"
                                 alt="한국포장연합 위너컴퍼니 명함"
-                                className="w-full h-auto rounded-lg shadow-2xl border border-neutral-700 object-contain bg-white"
+                                className="w-full h-auto rounded-lg   border-neutral-200 object-contain bg-white"
                             />
                         </div>
-
                     </div>
                 </div>
             </footer>
 
-            {/* Order & Payment Modal (유지) */}
+            {/* Price Info & Detail Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
                     <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-200">
