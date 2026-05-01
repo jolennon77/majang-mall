@@ -102,23 +102,27 @@ const MajangPremiumMall = () => {
                                 <img
                                     src="/business-card.webp"
                                     alt="한국포장연합 로고"
-                                    className="h-10 md:h-18 w-auto object-contain"
+                                    className="h-12 md:h-20 w-auto object-contain"
                                 />
                             </a>
                         </div>
-                        <div className="flex items-center gap-3 md:gap-4">
+                        <div className="flex items-center gap-2 md:gap-3">
                             <button className="p-2 hover:bg-neutral-100 rounded-full transition-colors">
                                 <ShoppingCart className="w-5 h-5" />
                             </button>
-                            <button className="text-xs md:text-sm font-semibold bg-black text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full hover:bg-neutral-800 transition-colors">
-                                상인 로그인
+                            <button className="text-xs md:text-sm font-bold bg-white border border-neutral-300 text-neutral-800 px-3 py-1.5 md:px-4 md:py-2 rounded-full hover:bg-neutral-50 transition-colors">
+                                로그인
+                            </button>
+                            <button className="text-xs md:text-sm font-bold bg-[#1A202C] text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full hover:bg-neutral-800 transition-colors">
+                                회원가입
                             </button>
                         </div>
                     </div>
 
                     {/* 메뉴 영역 (모바일에서는 로고 아래에 가로 스크롤로, PC에서는 우측 상단으로 이동) */}
                     <div className="md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 pb-3 md:pb-0">
-                        <div className="flex items-center justify-between md:justify-center md:gap-8 text-[12px] md:text-sm font-medium text-neutral-600 px-1 md:px-0">
+                        {/* 수정됨: text-[12px] -> text-sm, text-sm -> text-base, font-medium -> font-bold, 색상 조금 더 진하게 */}
+                        <div className="flex items-center justify-between md:justify-center md:gap-8 text-sm md:text-base font-bold text-neutral-800 px-1 md:px-0">
                             <a href="#" className="hover:text-black transition-colors">Home</a>
                             <a href="#meat" className="hover:text-black transition-colors">Meat(고기)</a>
                             <a href="#packaging" className="hover:text-black transition-colors">Packaging</a>
