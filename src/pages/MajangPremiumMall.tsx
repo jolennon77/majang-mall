@@ -46,6 +46,23 @@ const MajangPremiumMall = () => {
         { id: 5, category: '정육', name: '프리미엄 한우 안심(100g) ', price: '33,000', unit: '원', image: '/product-meat2.jpg', isPremium: true },
         { id: 6, category: '박스/포장', name: '보냉 스티로폼 박스 대형', price: '2,500', unit: '개', image: '/product-box.jpg' },
         { id: 7, category: '박스/포장', name: '특수 진공 포장지 (100매)', price: '15,000', unit: '묶음', image: '/product-wrap.jpg' },
+
+        // --- 새로 추가된 정육 ---
+        { id: 8, category: '정육', name: '프리미엄 한우 구이 모듬세트', price: '120,000', normalPrice: '150,000', discount: 20, unit: '세트', image: '/product-meat-set.jpg', isPremium: true },
+        { id: 9, category: '정육', name: '프리미엄 한우 부채살(100g)', price: '28,000', normalPrice: '35,000', discount: 20, unit: '원', image: '/product-meat-buchae.jpg', isPremium: true },
+        { id: 10, category: '정육', name: '프리미엄 한우 살치살(100g)', price: '38,000', normalPrice: '48,000', discount: 20, unit: '원', image: '/product-meat-salchi.jpg', isPremium: true },
+
+        // --- 새로 추가된 박스 및 포장재 ---
+        { id: 11, category: '박스/포장', name: '보냉용 아이스팩 소형 (10개)', price: '3,000', normalPrice: '4,000', discount: 25, unit: '묶음', image: '/product-ice-small.jpg' },
+        { id: 12, category: '박스/포장', name: '보냉용 아이스팩 중형 (10개)', price: '4,500', normalPrice: '6,000', discount: 25, unit: '묶음', image: '/product-ice-medium.jpg' },
+        { id: 13, category: '박스/포장', name: '보냉용 아이스팩 대형 (10개)', price: '6,000', normalPrice: '8,000', discount: 25, unit: '묶음', image: '/product-ice-large.jpg' },
+        { id: 14, category: '박스/포장', name: '포장용 박스 테이프', price: '1,500', normalPrice: '2,000', discount: 25, unit: '개', image: '/product-tape.jpg' },
+        { id: 15, category: '박스/포장', name: '안전 포장용 커터', price: '3,500', normalPrice: '5,000', discount: 30, unit: '개', image: '/product-cutter.jpg' },
+
+        // --- 새로 추가된 부자재 ---
+        { id: 16, category: '부자재', name: '작업용 면장갑 (10켤레)', price: '5,000', normalPrice: '7,000', discount: 28, unit: '묶음', image: '/product-gloves-cotton.jpg' },
+        { id: 17, category: '부자재', name: '안전 철망 발골장갑', price: '45,000', normalPrice: '55,000', discount: 18, unit: '개', image: '/product-gloves-metal.jpg' },
+        { id: 18, category: '부자재', name: '전문가용 스텐 연마봉 (야스리)', price: '25,000', normalPrice: '32,000', discount: 21, unit: '개', image: '/product-steel.jpg' },
     ];
 
     const categories = [
